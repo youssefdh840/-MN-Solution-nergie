@@ -32,7 +32,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-[#C87D55] selection:text-white">
+    <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-[#C87D55] selection:text-white">
       {/* 1. Header / Navbar with Logo & Contacts */}
       <Navbar
         onOpenCallModal={() => setIsCallModalOpen(true)}
@@ -40,7 +40,7 @@ export default function App() {
       />
 
       {/* Main Content Sections */}
-      <main className="flex-1">
+      <main className="flex-1 w-full">
         {/* 2 to 5. Hero Section with headline, description, primary and secondary CTAs */}
         <Hero
           onOpenCallModal={() => setIsCallModalOpen(true)}

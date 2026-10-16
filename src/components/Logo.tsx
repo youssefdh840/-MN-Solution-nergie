@@ -17,21 +17,21 @@ export const Logo: React.FC<LogoProps> = ({
 
   // Sizing definitions
   const markDimensions = {
-    sm: { width: 34, height: 34 },
-    md: { width: 44, height: 44 },
-    lg: { width: 56, height: 56 },
-    xl: { width: 72, height: 72 },
+    sm: { width: 32, height: 32 },
+    md: { width: 40, height: 40 },
+    lg: { width: 52, height: 52 },
+    xl: { width: 68, height: 68 },
   }[size];
 
   const textSizes = {
-    sm: { brand: 'text-base font-extrabold tracking-tight', tag: 'text-[9px] tracking-wider' },
-    md: { brand: 'text-lg sm:text-xl font-extrabold tracking-tight', tag: 'text-[10px] tracking-widest' },
-    lg: { brand: 'text-2xl font-black tracking-tight', tag: 'text-xs tracking-widest' },
-    xl: { brand: 'text-3xl font-black tracking-tight', tag: 'text-sm tracking-widest' },
+    sm: { brand: 'text-sm sm:text-base font-extrabold tracking-tight', tag: 'text-[9px] tracking-wider' },
+    md: { brand: 'text-base sm:text-lg lg:text-xl font-extrabold tracking-tight', tag: 'text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest' },
+    lg: { brand: 'text-xl sm:text-2xl font-black tracking-tight', tag: 'text-[10px] sm:text-xs tracking-widest' },
+    xl: { brand: 'text-2xl sm:text-3xl font-black tracking-tight', tag: 'text-xs sm:text-sm tracking-widest' },
   }[size];
 
   return (
-    <div className={`inline-flex items-center gap-3 select-none ${className}`}>
+    <div className={`inline-flex items-center gap-2.5 sm:gap-3 select-none ${className}`}>
       {/* SVG Emblem Mark */}
       <svg
         width={markDimensions.width}
@@ -40,6 +40,7 @@ export const Logo: React.FC<LogoProps> = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="shrink-0 transition-transform duration-300 hover:scale-105"
+        role="img"
         aria-label="Logo MN Solution Énergie"
       >
         <defs>
@@ -141,7 +142,7 @@ export const Logo: React.FC<LogoProps> = ({
 
       {/* Brand Text */}
       <div className="flex flex-col leading-none">
-        <div className="flex items-baseline gap-1.5">
+        <div className="flex items-baseline gap-1 sm:gap-1.5 flex-wrap">
           <span
             className={`${textSizes.brand} ${
               isLight ? 'text-white' : 'text-[#0F1E36]'
@@ -164,7 +165,7 @@ export const Logo: React.FC<LogoProps> = ({
         </div>
 
         {showSubtitle && (
-          <div className="flex items-center gap-1.5 mt-1">
+          <div className="flex items-center gap-1 sm:gap-1.5 mt-0.5 sm:mt-1 flex-wrap">
             <span
               className={`${textSizes.tag} font-medium uppercase ${
                 isLight ? 'text-slate-300' : 'text-slate-500'
@@ -172,7 +173,7 @@ export const Logo: React.FC<LogoProps> = ({
             >
               Chauffage
             </span>
-            <span className="text-[#C87D55] text-xs leading-none">•</span>
+            <span className="text-[#C87D55] text-[10px] leading-none">•</span>
             <span
               className={`${textSizes.tag} font-medium uppercase ${
                 isLight ? 'text-slate-300' : 'text-slate-500'
@@ -180,7 +181,7 @@ export const Logo: React.FC<LogoProps> = ({
             >
               Climatisation
             </span>
-            <span className="text-[#C87D55] text-xs leading-none">•</span>
+            <span className="text-[#C87D55] text-[10px] leading-none">•</span>
             <span
               className={`${textSizes.tag} font-medium uppercase ${
                 isLight ? 'text-slate-300' : 'text-slate-500'

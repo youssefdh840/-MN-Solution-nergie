@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Phone, Mail, Menu, X, ChevronRight, FileText } from 'lucide-react';
 import { Logo } from './Logo';
 import { COMPANY_INFO } from '../data/companyData';
+import { ServiceCategory } from '../types';
 
 interface NavbarProps {
   onOpenCallModal: () => void;
-  onNavigateToQuote: (service?: 'chauffage' | 'climatisation' | 'plomberie') => void;
+  onNavigateToQuote: (service?: ServiceCategory) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -14,7 +15,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
+  // Scroll detection for header elevation
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -22,6 +26,26 @@ export const Navbar: React.FC<NavbarProps> = ({
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open & handle Escape key
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setMobileMenuOpen(false);
+          menuButtonRef.current?.focus();
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { label: 'Accueil', href: '#accueil' },
@@ -35,147 +59,39 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Contact', href: '#contact' },
   ];
 
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-40 w-full transition-all duration-200">
-      {/* Top micro bar with contact info */}
-      <div className="bg-[#0B1526] text-slate-300 text-xs py-1.5 px-4 border-b border-slate-800">
+      {/* Top contact micro bar */}
+      <div className="bg-[#0B1526] text-slate-300 text-xs py-2 px-3 sm:px-4 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-4">
-            <span className="hidden sm:inline text-slate-400">
+          <div className="flex items-center gap-3">
+            <span className="hidden md:inline text-slate-400">
               Chauffage • Climatisation • Plomberie à Lyon et environs
             </span>
-            <span className="inline-flex items-center gap-1 text-amber-400 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Devis en ligne sans engagement
+            <span className="inline-flex items-center gap-1.5 text-amber-300 font-medium text-[11px] sm:text-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              Devis en ligne gratuit & sans engagement
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-medium ml-auto">
-            <div className="hidden md:flex items-center gap-3">
-              <span className="text-slate-400">Lignes directes :</span>
+          <div className="flex items-center gap-3 sm:gap-4 text-xs font-medium ml-auto">
+            <div className="hidden sm:flex items-center gap-3">
+              <span className="text-slate-400 hidden lg:inline">Lignes directes :</span>
               {COMPANY_INFO.phoneNumbers.map((phone) => (
                 <a
                   key={phone.raw}
                   href={`tel:${phone.raw}`}
-                  className="text-white hover:text-[#C87D55] font-semibold transition-colors flex items-center gap-1"
-                >
-                  <Phone className="w-3 h-3 text-[#C87D55]" />
-                  {phone.display}
-                </a>
-              ))}
-            </div>
-
-            <a
-              href={`mailto:${COMPANY_INFO.email}`}
-              className="hidden lg:flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors"
-            >
-              <Mail className="w-3 h-3 text-slate-400" />
-              <span>{COMPANY_INFO.email}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main navigation bar */}
-      <div
-        className={`bg-white/95 backdrop-blur-md transition-shadow duration-300 border-b ${
-          scrolled ? 'shadow-md border-slate-200/90 py-2.5' : 'border-slate-100 py-3.5'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo */}
-          <a href="#accueil" className="focus:outline-none">
-            <Logo size="md" variant="dark" />
-          </a>
-
-          {/* Desktop Links */}
-          <nav className="hidden xl:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-semibold text-slate-700 hover:text-[#C87D55] transition-colors py-1"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Action buttons */}
-          <div className="hidden sm:flex items-center gap-3">
-            <button
-              onClick={onOpenCallModal}
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-[#0F1E36] bg-slate-100 hover:bg-slate-200 transition-colors"
-            >
-              <Phone className="w-4 h-4 text-[#C87D55]" />
-              <span>Appeler</span>
-            </button>
-
-            <button
-              onClick={() => onNavigateToQuote()}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-[#0F1E36] hover:bg-[#C87D55] transition-all shadow-sm hover:shadow-md active:scale-95"
-            >
-              <FileText className="w-4 h-4 text-[#C87D55]" />
-              <span>Demander un devis</span>
-            </button>
-          </div>
-
-          {/* Mobile hamburger button */}
-          <div className="flex items-center gap-2 xl:hidden">
-            <button
-              onClick={onOpenCallModal}
-              className="p-2 text-slate-700 hover:text-[#C87D55] bg-slate-100 rounded-lg sm:hidden"
-              aria-label="Appeler l'entreprise"
-            >
-              <Phone className="w-5 h-5 text-[#C87D55]" />
-            </button>
-
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg"
-              aria-label="Ouvrir le menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="xl:hidden bg-white border-b border-slate-200 shadow-2xl px-4 py-5 animate-in slide-in-from-top-4 duration-200">
-          <nav className="flex flex-col space-y-2 mb-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-[#C87D55]"
-              >
-                <span>{link.label}</span>
-                <ChevronRight className="w-4 h-4 text-slate-300" />
-              </a>
-            ))}
-          </nav>
-
-          <div className="space-y-3 pt-3 border-t border-slate-100">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onNavigateToQuote();
-              }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#0F1E36] text-white font-extrabold text-sm shadow-md"
-            >
-              <FileText className="w-4 h-4 text-[#C87D55]" />
-              <span>Demander un devis gratuit</span>
-            </button>
-
-            <div className="grid grid-cols-2 gap-2">
-              {COMPANY_INFO.phoneNumbers.map((phone) => (
-                <a
-                  key={phone.raw}
-                  href={`tel:${phone.raw}`}
-                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-slate-100 text-slate-900 font-bold text-xs"
+                  className="min-h-[32px] text-white hover:text-[#C87D55] font-semibold transition-colors inline-flex items-center gap-1.5 focus-visible:ring-1 focus-visible:ring-[#C87D55] rounded px-1"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#C87D55]" />
                   <span>{phone.display}</span>
@@ -185,9 +101,155 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <a
               href={`mailto:${COMPANY_INFO.email}`}
-              className="block text-center text-xs text-slate-500 hover:text-slate-800 py-1"
+              className="min-h-[32px] hidden lg:inline-flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors focus-visible:ring-1 focus-visible:ring-[#C87D55] rounded px-1"
             >
-              {COMPANY_INFO.email}
+              <Mail className="w-3.5 h-3.5 text-slate-400" />
+              <span>{COMPANY_INFO.email}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Main navigation bar */}
+      <div
+        className={`bg-white/95 backdrop-blur-md transition-shadow duration-300 border-b border-slate-200/90 ${
+          scrolled ? 'shadow-md py-2' : 'py-3'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
+          {/* Logo with smooth click */}
+          <a
+            href="#accueil"
+            onClick={(e) => handleNavLinkClick(e, '#accueil')}
+            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C87D55] rounded-xl p-0.5 shrink-0"
+            aria-label="Accueil MN Solution Énergie"
+          >
+            <Logo size="md" variant="dark" />
+          </a>
+
+          {/* Desktop Links (lg and above) */}
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-6" aria-label="Navigation principale">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
+                className="min-h-[44px] flex items-center text-xs xl:text-sm font-bold text-slate-700 hover:text-[#C87D55] transition-colors focus-visible:ring-2 focus-visible:ring-[#C87D55] rounded-lg px-2"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Action buttons (desktop & tablets) */}
+          <div className="hidden md:flex items-center gap-2.5 shrink-0">
+            <button
+              type="button"
+              onClick={onOpenCallModal}
+              className="min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-[#0F1E36] bg-slate-100 hover:bg-slate-200 active:scale-95 transition-all inline-flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+            >
+              <Phone className="w-4 h-4 text-[#C87D55]" />
+              <span>Appeler</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onNavigateToQuote()}
+              className="min-h-[44px] px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-[#0F1E36] hover:bg-[#C87D55] active:scale-95 transition-all shadow-sm hover:shadow-md inline-flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+            >
+              <FileText className="w-4 h-4 text-[#C87D55]" />
+              <span>Demander un devis</span>
+            </button>
+          </div>
+
+          {/* Mobile buttons (visible below lg) */}
+          <div className="flex items-center gap-1.5 lg:hidden">
+            <button
+              type="button"
+              onClick={onOpenCallModal}
+              className="min-w-[44px] min-h-[44px] p-2 text-slate-700 hover:text-[#C87D55] bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+              aria-label="Appeler l'entreprise directement"
+            >
+              <Phone className="w-5 h-5 text-[#C87D55]" />
+            </button>
+
+            <button
+              type="button"
+              ref={menuButtonRef}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="min-w-[44px] min-h-[44px] p-2 text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav-drawer"
+              aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu de navigation'}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Backdrop overlay for mobile menu */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 top-[110px] bg-slate-950/50 backdrop-blur-xs z-30 lg:hidden animate-in fade-in duration-200"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div
+          id="mobile-nav-drawer"
+          ref={mobileMenuRef}
+          className="lg:hidden relative z-40 bg-white border-b border-slate-200 shadow-2xl px-4 py-5 max-h-[calc(100vh-120px)] overflow-y-auto animate-in slide-in-from-top-3 duration-200"
+        >
+          <nav className="flex flex-col space-y-1 mb-5" aria-label="Navigation mobile">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
+                className="min-h-[44px] flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-100 hover:text-[#C87D55] active:bg-slate-200 transition-colors focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+              >
+                <span>{link.label}</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </a>
+            ))}
+          </nav>
+
+          <div className="space-y-3 pt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onNavigateToQuote();
+              }}
+              className="w-full min-h-[48px] flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#0F1E36] hover:bg-[#C87D55] text-white font-extrabold text-sm shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+            >
+              <FileText className="w-4 h-4 text-[#C87D55]" />
+              <span>Demander un devis gratuit</span>
+            </button>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {COMPANY_INFO.phoneNumbers.map((phone, idx) => (
+                <a
+                  key={phone.raw}
+                  href={`tel:${phone.raw}`}
+                  className="min-h-[44px] flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-900 font-bold text-xs transition-colors focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+                >
+                  <Phone className="w-4 h-4 text-[#C87D55]" />
+                  <span>{phone.display}</span>
+                </a>
+              ))}
+            </div>
+
+            <a
+              href={`mailto:${COMPANY_INFO.email}`}
+              className="min-h-[44px] flex items-center justify-center gap-1.5 text-xs text-slate-500 hover:text-slate-900 py-2 transition-colors focus-visible:ring-2 focus-visible:ring-[#C87D55] rounded-lg"
+            >
+              <Mail className="w-3.5 h-3.5 text-slate-400" />
+              <span>{COMPANY_INFO.email}</span>
             </a>
           </div>
         </div>
