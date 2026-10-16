@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ServicesSection } from './components/ServicesSection';
@@ -20,6 +20,26 @@ export default function App() {
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceCategory>('chauffage');
+
+  useEffect(() => {
+    const handleRouteCheck = () => {
+      if (
+        window.location.pathname === '/admin' ||
+        window.location.pathname === '/admin/' ||
+        window.location.hash === '#admin'
+      ) {
+        setIsAdminModalOpen(true);
+      }
+    };
+
+    handleRouteCheck();
+    window.addEventListener('hashchange', handleRouteCheck);
+    window.addEventListener('popstate', handleRouteCheck);
+    return () => {
+      window.removeEventListener('hashchange', handleRouteCheck);
+      window.removeEventListener('popstate', handleRouteCheck);
+    };
+  }, []);
 
   const scrollToQuote = (service?: ServiceCategory) => {
     if (service) {
@@ -101,7 +121,12 @@ export default function App() {
 
       <AdminModal
         isOpen={isAdminModalOpen}
-        onClose={() => setIsAdminModalOpen(false)}
+        onClose={() => {
+          setIsAdminModalOpen(false);
+          if (window.location.hash === '#admin') {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        }}
       />
     </div>
   );

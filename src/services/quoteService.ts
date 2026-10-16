@@ -1,62 +1,60 @@
+import {
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  Unsubscribe,
+} from 'firebase/firestore';
+import { User } from 'firebase/auth';
+import { db, handleFirestoreError, OperationType } from '../firebase';
 import { QuoteRequest, RequestStatus } from '../types';
 
-const STORAGE_KEY = 'mn_solution_energie_quotes_v1';
+const COLLECTION_NAME = 'quoteRequests';
+const ADMINS_COLLECTION = 'admins';
 
-// Seed demo quote for testing initial admin view if empty
-const INITIAL_DEMO_REQUESTS: QuoteRequest[] = [
-  {
-    id: 'req_demo_01',
-    reference: 'MN-2026-4821',
-    customerName: 'Jean-Marc Dupont',
-    phone: '06 12 34 56 78',
-    email: 'jm.dupont@example.fr',
-    service: 'chauffage',
-    projectType: 'entretien',
-    description: 'Entretien annuel d’une chaudière à condensation et contrôle des radiateurs dans appartement.',
-    city: 'Lyon 6e',
-    address: 'Cours Vitton',
-    preferredContact: 'telephone',
-    status: 'visite_programmee',
-    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-    updatedAt: new Date(Date.now() - 86400000).toISOString(),
-    notes: ['Appel passé le 14/10, rdv convenu pour vendredi matin 9h.'],
-  },
-  {
-    id: 'req_demo_02',
-    reference: 'MN-2026-7290',
-    customerName: 'Sarah Belkacem',
-    phone: '06 98 76 54 32',
-    email: 'sarah.b@example.fr',
-    service: 'climatisation',
-    projectType: 'installation',
-    description: 'Installation d’un climatiseur bi-split (salon + chambre parentale) en maison de ville.',
-    city: 'Villeurbanne',
-    address: 'Avenue Roger Salengro',
-    preferredContact: 'sms',
-    status: 'nouveau',
-    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-    updatedAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-    notes: [],
-  },
+// Authorized admin emails list (verified via email_verified)
+export const AUTHORIZED_ADMIN_EMAILS = [
+  'youssefdh840@gmail.com',
+  'mohamednefzaoui09@gmail.com',
 ];
 
 export const quoteService = {
-  getRequests(): QuoteRequest[] {
+  /**
+   * Securely verifies whether a Firebase user has administrator privileges.
+   * Checks runtime email + verification, and checks the /admins collection in Firestore.
+   */
+  async verifyAdmin(user: User | null): Promise<boolean> {
+    if (!user) return false;
+
+    // 1. Direct verified email check
+    const userEmail = user.email?.toLowerCase().trim();
+    if (userEmail && AUTHORIZED_ADMIN_EMAILS.includes(userEmail)) {
+      return true;
+    }
+
+    // 2. Check /admins/{uid} document in Firestore
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (!stored) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_DEMO_REQUESTS));
-        return INITIAL_DEMO_REQUESTS;
-      }
-      return JSON.parse(stored);
+      const adminDocRef = doc(db, ADMINS_COLLECTION, user.uid);
+      const adminSnap = await getDoc(adminDocRef);
+      return adminSnap.exists();
     } catch {
-      return INITIAL_DEMO_REQUESTS;
+      return false;
     }
   },
 
-  createRequest(data: Omit<QuoteRequest, 'id' | 'reference' | 'status' | 'createdAt' | 'updatedAt' | 'notes'>): QuoteRequest {
-    const requests = this.getRequests();
-
+  /**
+   * Submits a new quote request directly to Cloud Firestore.
+   * Validated client-side and server-side via firestore.rules.
+   */
+  async createRequest(
+    data: Omit<QuoteRequest, 'id' | 'reference' | 'status' | 'createdAt' | 'updatedAt' | 'notes'>
+  ): Promise<QuoteRequest> {
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
     const reference = `MN-${new Date().getFullYear()}-${randomSuffix}`;
     const id = `req_${Date.now()}_${randomSuffix}`;
@@ -72,47 +70,116 @@ export const quoteService = {
       notes: [],
     };
 
-    const updated = [newRequest, ...requests];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-
-    return newRequest;
-  },
-
-  updateStatus(id: string, status: RequestStatus): boolean {
-    const requests = this.getRequests();
-    const index = requests.findIndex((r) => r.id === id);
-    if (index === -1) return false;
-
-    requests[index].status = status;
-    requests[index].updatedAt = new Date().toISOString();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(requests));
-    return true;
-  },
-
-  addNote(id: string, note: string): boolean {
-    const requests = this.getRequests();
-    const index = requests.findIndex((r) => r.id === id);
-    if (index === -1) return false;
-
-    if (!requests[index].notes) {
-      requests[index].notes = [];
+    try {
+      const docRef = doc(db, COLLECTION_NAME, id);
+      await setDoc(docRef, newRequest);
+      return newRequest;
+    } catch (error) {
+      handleFirestoreError(error, OperationType.CREATE, `${COLLECTION_NAME}/${id}`);
+      throw error;
     }
-    requests[index].notes!.push(`[${new Date().toLocaleDateString('fr-FR')}] ${note}`);
-    requests[index].updatedAt = new Date().toISOString();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(requests));
-    return true;
   },
 
-  deleteRequest(id: string): boolean {
-    const requests = this.getRequests();
-    const filtered = requests.filter((r) => r.id !== id);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
-    return true;
+  /**
+   * Attaches a real-time listener to authorized quote requests.
+   * Restricted to authorized administrators by Firestore Security Rules.
+   */
+  subscribeToRequests(
+    onData: (requests: QuoteRequest[]) => void,
+    onError: (error: Error) => void
+  ): Unsubscribe {
+    const q = query(collection(db, COLLECTION_NAME), orderBy('createdAt', 'desc'));
+
+    return onSnapshot(
+      q,
+      (snapshot) => {
+        const requests: QuoteRequest[] = [];
+        snapshot.forEach((d) => {
+          requests.push(d.data() as QuoteRequest);
+        });
+        onData(requests);
+      },
+      (error) => {
+        console.error('Erreur de lecture Firestore quoteRequests:', error);
+        handleFirestoreError(error, OperationType.LIST, COLLECTION_NAME);
+        onError(error);
+      }
+    );
   },
 
-  // Inspect Firebase status
-  isFirebaseConfigured(): boolean {
-    // Check if cloud Firebase config or service worker exists
-    return false;
+  /**
+   * One-time fetch of quote requests for administrators.
+   */
+  async fetchRequests(): Promise<QuoteRequest[]> {
+    try {
+      const q = query(collection(db, COLLECTION_NAME), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+      const requests: QuoteRequest[] = [];
+      snapshot.forEach((d) => {
+        requests.push(d.data() as QuoteRequest);
+      });
+      return requests;
+    } catch (error) {
+      handleFirestoreError(error, OperationType.LIST, COLLECTION_NAME);
+      throw error;
+    }
+  },
+
+  /**
+   * Updates request status in Firestore.
+   */
+  async updateStatus(id: string, newStatus: RequestStatus): Promise<void> {
+    const path = `${COLLECTION_NAME}/${id}`;
+    try {
+      const docRef = doc(db, COLLECTION_NAME, id);
+      await updateDoc(docRef, {
+        status: newStatus,
+        updatedAt: new Date().toISOString(),
+      });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, path);
+      throw error;
+    }
+  },
+
+  /**
+   * Appends a private internal note for administrators.
+   */
+  async addNote(id: string, noteText: string, existingNotes: string[] = []): Promise<void> {
+    const path = `${COLLECTION_NAME}/${id}`;
+    const timestamp = new Date().toLocaleDateString('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    const formattedNote = `[${timestamp}] ${noteText}`;
+    const updatedNotes = [...existingNotes, formattedNote];
+
+    try {
+      const docRef = doc(db, COLLECTION_NAME, id);
+      await updateDoc(docRef, {
+        notes: updatedNotes,
+        updatedAt: new Date().toISOString(),
+      });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, path);
+      throw error;
+    }
+  },
+
+  /**
+   * Deletes a request from Firestore.
+   */
+  async deleteRequest(id: string): Promise<void> {
+    const path = `${COLLECTION_NAME}/${id}`;
+    try {
+      const docRef = doc(db, COLLECTION_NAME, id);
+      await deleteDoc(docRef);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.DELETE, path);
+      throw error;
+    }
   },
 };

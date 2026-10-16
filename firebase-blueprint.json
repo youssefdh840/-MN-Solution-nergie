@@ -1,0 +1,117 @@
+{
+  "entities": {
+    "QuoteRequest": {
+      "title": "QuoteRequest",
+      "description": "Demande de devis soumise par un client",
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string",
+          "description": "Code de référence unique de la demande",
+          "maxLength": 32
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Nom complet du client",
+          "maxLength": 100
+        },
+        "phone": {
+          "type": "string",
+          "description": "Numéro de téléphone du client",
+          "maxLength": 30
+        },
+        "email": {
+          "type": "string",
+          "description": "Adresse email du client si fournie",
+          "maxLength": 120
+        },
+        "service": {
+          "type": "string",
+          "description": "Catégorie de prestation demandée",
+          "enum": ["chauffage", "climatisation", "plomberie", "multiple"]
+        },
+        "projectType": {
+          "type": "string",
+          "description": "Type d'intervention nécessaire",
+          "enum": ["installation", "depannage", "entretien", "renovation", "autre"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Détails du besoin exprimé par le client",
+          "maxLength": 3000
+        },
+        "city": {
+          "type": "string",
+          "description": "Ville ou commune d'intervention",
+          "maxLength": 100
+        },
+        "address": {
+          "type": "string",
+          "description": "Adresse postale du chantier si fournie",
+          "maxLength": 200
+        },
+        "preferredContact": {
+          "type": "string",
+          "description": "Moyen de contact privilégié",
+          "enum": ["telephone", "sms", "email"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Statut de traitement du dossier",
+          "enum": ["nouveau", "contacte", "visite_programmee", "devis_envoye", "termine", "annule", "archive"]
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date et heure de création de la demande",
+          "maxLength": 40
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Date et heure de dernière mise à jour",
+          "maxLength": 40
+        },
+        "notes": {
+          "type": "array",
+          "description": "Notes internes ajoutées par l'artisan ou l'administrateur"
+        }
+      },
+      "required": ["reference", "customerName", "phone", "service", "projectType", "description", "city", "preferredContact", "status", "createdAt", "updatedAt"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Administrateur autorisé pour la gestion des demandes",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email de l'administrateur",
+          "maxLength": 120
+        },
+        "role": {
+          "type": "string",
+          "description": "Rôle de l'utilisateur",
+          "enum": ["admin"]
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date de création du compte administrateur"
+        }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/quoteRequests/{requestId}": {
+      "schema": {
+        "$ref": "#/entities/QuoteRequest"
+      },
+      "description": "Demandes de devis soumises par les visiteurs et gérées par les administrateurs"
+    },
+    "/admins/{adminId}": {
+      "schema": {
+        "$ref": "#/entities/AdminUser"
+      },
+      "description": "Comptes administrateurs autorisés"
+    }
+  }
+}

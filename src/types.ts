@@ -4,7 +4,7 @@ export type ProjectType = 'installation' | 'depannage' | 'entretien' | 'renovati
 
 export type PreferredContact = 'telephone' | 'sms' | 'email';
 
-export type RequestStatus = 'nouveau' | 'contacte' | 'visite_programmee' | 'devis_envoye' | 'termine' | 'archive';
+export type RequestStatus = 'nouveau' | 'contacte' | 'visite_programmee' | 'devis_envoye' | 'termine' | 'annule' | 'archive';
 
 export interface QuoteRequest {
   id: string;

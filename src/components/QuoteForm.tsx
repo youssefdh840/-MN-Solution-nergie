@@ -113,14 +113,15 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
     scrollToFormTop();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep(3)) return;
 
     setSubmitting(true);
+    setErrors({});
 
     try {
-      const created = quoteService.createRequest({
+      const created = await quoteService.createRequest({
         customerName: customerName.trim(),
         phone: phone.trim(),
         email: email.trim() || undefined,
@@ -132,15 +133,16 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
         preferredContact,
       });
 
-      setTimeout(() => {
-        setSubmitting(false);
-        setSubmittedRequest(created);
-        if (onSuccess) onSuccess(created);
-        scrollToFormTop();
-      }, 500);
-    } catch {
       setSubmitting(false);
-      setErrors({ form: 'Une erreur est survenue lors de l’enregistrement de votre demande. Veuillez réessayer ou nous contacter par téléphone.' });
+      setSubmittedRequest(created);
+      if (onSuccess) onSuccess(created);
+      scrollToFormTop();
+    } catch (err) {
+      console.error('Erreur de soumission Firestore :', err);
+      setSubmitting(false);
+      setErrors({
+        form: 'Une erreur est survenue lors de l’enregistrement de votre demande. Veuillez vérifier votre connexion ou nous contacter par téléphone au 07 58 78 22 29.',
+      });
     }
   };
 
