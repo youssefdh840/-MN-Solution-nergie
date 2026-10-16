@@ -1,0 +1,6 @@
+{
+  "name": "MN Solution Énergie",
+  "description": "Site officiel de MN Solution Énergie - Chauffage, Climatisation et Plomberie à Lyon et dans les environs. Votre confort, notre priorité !",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
