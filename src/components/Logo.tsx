@@ -19,25 +19,25 @@ export const Logo: React.FC<LogoProps> = ({
 
   // Responsive image dimensions based on size
   const imageSizeClasses = {
-    sm: 'h-9 sm:h-10 w-auto',
-    md: 'h-12 sm:h-14 w-auto', // Optimal clean sizing requested for header
-    lg: 'h-14 sm:h-16 lg:h-18 w-auto',
-    xl: 'h-16 sm:h-20 lg:h-24 w-auto',
+    sm: 'h-10 w-10 sm:h-12 sm:w-12',
+    md: 'h-14 w-14 sm:h-16 sm:w-16', // Increased size (h-14 or h-16 / w-14 or w-16) maintaining aspect ratio
+    lg: 'h-16 w-16 sm:h-20 sm:w-20',
+    xl: 'h-20 w-20 sm:h-24 sm:w-24',
   }[size];
 
   // Typography sizing
   const textSizes = {
     sm: {
-      brand: 'text-sm sm:text-base font-extrabold tracking-tight',
-      tag: 'text-[9px] tracking-wider',
+      brand: 'text-xs sm:text-sm font-extrabold tracking-tight',
+      tag: 'text-[8.5px] sm:text-[9px] tracking-wider',
     },
     md: {
-      brand: 'text-base sm:text-lg lg:text-xl font-extrabold tracking-tight',
-      tag: 'text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest',
+      brand: 'text-[13px] min-[360px]:text-sm sm:text-base lg:text-lg xl:text-xl font-extrabold tracking-tight',
+      tag: 'text-[8px] min-[360px]:text-[8.5px] sm:text-[9.5px] tracking-wider sm:tracking-widest',
     },
     lg: {
-      brand: 'text-lg sm:text-xl lg:text-2xl font-black tracking-tight',
-      tag: 'text-[10px] sm:text-xs tracking-widest',
+      brand: 'text-base sm:text-lg lg:text-2xl font-black tracking-tight',
+      tag: 'text-[9.5px] sm:text-xs tracking-widest',
     },
     xl: {
       brand: 'text-xl sm:text-2xl lg:text-3xl font-black tracking-tight',
@@ -46,43 +46,43 @@ export const Logo: React.FC<LogoProps> = ({
   }[size];
 
   return (
-    <div className={`inline-flex items-center gap-2.5 sm:gap-3.5 select-none ${className}`}>
+    <div className={`inline-flex items-center gap-2 sm:gap-3 select-none min-w-0 ${className}`}>
       {/* Official MN Solution Énergie Circular Emblem Image */}
       <img
         src="/logo.png"
         alt="MN Solution Énergie Logo"
-        className={`${imageSizeClasses} object-contain shrink-0 drop-shadow-md transition-transform duration-300 hover:scale-105`}
+        className={`${imageSizeClasses} aspect-square object-contain shrink-0 drop-shadow-md transition-transform duration-300 hover:scale-105`}
         referrerPolicy="no-referrer"
         loading="eager"
       />
 
       {/* Brand Name & Subtitle */}
       {showText && (
-        <div className="flex flex-col leading-none">
-          <div className="flex items-baseline gap-1 sm:gap-1.5 flex-wrap">
+        <div className="flex flex-col leading-tight min-w-0">
+          <div className="flex items-baseline gap-1 sm:gap-1.5 flex-nowrap">
             <span
               className={`${textSizes.brand} ${
                 isLight ? 'text-white' : 'text-[#0F1E36]'
-              }`}
+              } shrink-0`}
             >
               MN
             </span>
             <span
               className={`${textSizes.brand} font-semibold ${
                 isLight ? 'text-slate-100' : 'text-slate-900'
-              }`}
+              } shrink-0`}
             >
               SOLUTION
             </span>
             <span
-              className={`${textSizes.brand} font-black text-[#C87D55]`}
+              className={`${textSizes.brand} font-black text-[#C87D55] shrink-0`}
             >
               ÉNERGIE
             </span>
           </div>
 
           {showSubtitle && (
-            <div className="flex items-center gap-1 sm:gap-1.5 mt-0.5 sm:mt-1 flex-wrap">
+            <div className="hidden min-[360px]:flex items-center gap-1 sm:gap-1.5 mt-0.5 flex-wrap">
               <span
                 className={`${textSizes.tag} font-medium uppercase ${
                   isLight ? 'text-slate-300' : 'text-slate-500'

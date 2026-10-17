@@ -113,22 +113,22 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Main navigation bar */}
       <div
         className={`bg-white/95 backdrop-blur-md transition-shadow duration-300 border-b border-slate-200/90 ${
-          scrolled ? 'shadow-md py-2' : 'py-3'
+          scrolled ? 'shadow-md py-2' : 'py-2.5 sm:py-3'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
+        <div className="flex justify-between items-center w-full px-4 overflow-hidden max-w-7xl mx-auto gap-2">
           {/* Logo with smooth click */}
           <a
             href="#accueil"
             onClick={(e) => handleNavLinkClick(e, '#accueil')}
-            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C87D55] rounded-xl p-0.5 shrink-0"
+            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C87D55] rounded-xl p-0.5 flex items-center min-w-0 shrink"
             aria-label="Accueil MN Solution Énergie"
           >
             <Logo size="md" variant="dark" />
           </a>
 
           {/* Desktop Links (lg and above) */}
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-6" aria-label="Navigation principale">
+          <nav className="hidden lg:flex items-center gap-3 xl:gap-5 shrink-0" aria-label="Navigation principale">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -141,8 +141,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </nav>
 
-          {/* Action buttons (desktop & tablets) */}
-          <div className="hidden md:flex items-center gap-2.5 shrink-0">
+          {/* Action buttons (desktop: lg and above) */}
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             <button
               type="button"
               onClick={onOpenCallModal}
@@ -162,12 +162,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Mobile buttons (visible below lg) */}
-          <div className="flex items-center gap-1.5 lg:hidden">
+          {/* Mobile buttons (visible below lg, always fully visible on the right) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
             <button
               type="button"
               onClick={onOpenCallModal}
-              className="min-w-[44px] min-h-[44px] p-2 text-slate-700 hover:text-[#C87D55] bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+              className="min-w-[40px] sm:min-w-[44px] min-h-[44px] p-2 text-slate-700 hover:text-[#C87D55] bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-[#C87D55] shrink-0"
               aria-label="Appeler l'entreprise directement"
             >
               <Phone className="w-5 h-5 text-[#C87D55]" />
@@ -177,7 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               type="button"
               ref={menuButtonRef}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="min-w-[44px] min-h-[44px] p-2 text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+              className="min-w-[44px] min-h-[44px] p-2 text-slate-800 hover:text-slate-950 bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-[#C87D55] shrink-0"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav-drawer"
               aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu de navigation'}
@@ -191,7 +191,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Backdrop overlay for mobile menu */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 top-[110px] bg-slate-950/50 backdrop-blur-xs z-30 lg:hidden animate-in fade-in duration-200"
+          className="fixed inset-0 top-[105px] sm:top-[118px] bg-slate-950/50 backdrop-blur-xs z-30 lg:hidden animate-in fade-in duration-200"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />
