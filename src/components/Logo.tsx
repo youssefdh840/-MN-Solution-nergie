@@ -19,8 +19,8 @@ export const Logo: React.FC<LogoProps> = ({
 
   // Responsive image dimensions based on size
   const imageSizeClasses = {
-    sm: 'h-10 w-10 sm:h-12 sm:w-12',
-    md: 'h-14 w-14 sm:h-16 sm:w-16', // Increased size (h-14 or h-16 / w-14 or w-16) maintaining aspect ratio
+    sm: 'h-9 w-9 sm:h-11 sm:w-11',
+    md: 'h-12 w-12 min-[380px]:h-14 min-[380px]:w-14 sm:h-16 sm:w-16', // Prominent circular logo
     lg: 'h-16 w-16 sm:h-20 sm:w-20',
     xl: 'h-20 w-20 sm:h-24 sm:w-24',
   }[size];
@@ -29,11 +29,11 @@ export const Logo: React.FC<LogoProps> = ({
   const textSizes = {
     sm: {
       brand: 'text-xs sm:text-sm font-extrabold tracking-tight',
-      tag: 'text-[8.5px] sm:text-[9px] tracking-wider',
+      tag: 'text-[8px] sm:text-[9px] tracking-wider',
     },
     md: {
-      brand: 'text-[13px] min-[360px]:text-sm sm:text-base lg:text-lg xl:text-xl font-extrabold tracking-tight',
-      tag: 'text-[8px] min-[360px]:text-[8.5px] sm:text-[9.5px] tracking-wider sm:tracking-widest',
+      brand: 'text-xs min-[350px]:text-[13px] min-[390px]:text-sm sm:text-base md:text-lg lg:text-xl font-extrabold tracking-tight',
+      tag: 'text-[7.5px] min-[390px]:text-[8.5px] sm:text-[9.5px] tracking-wider sm:tracking-widest',
     },
     lg: {
       brand: 'text-base sm:text-lg lg:text-2xl font-black tracking-tight',
@@ -46,7 +46,7 @@ export const Logo: React.FC<LogoProps> = ({
   }[size];
 
   return (
-    <div className={`inline-flex items-center gap-2 sm:gap-3 select-none min-w-0 ${className}`}>
+    <div className={`inline-flex items-center gap-1.5 min-[380px]:gap-2.5 sm:gap-3 select-none min-w-0 ${className}`}>
       {/* Official MN Solution Énergie Circular Emblem Image */}
       <img
         src="/logo.png"
@@ -58,8 +58,8 @@ export const Logo: React.FC<LogoProps> = ({
 
       {/* Brand Name & Subtitle */}
       {showText && (
-        <div className="flex flex-col leading-tight min-w-0">
-          <div className="flex items-baseline gap-1 sm:gap-1.5 flex-nowrap">
+        <div className="flex flex-col justify-center leading-none min-w-0">
+          <div className="flex items-baseline gap-1 sm:gap-1.5 flex-nowrap whitespace-nowrap">
             <span
               className={`${textSizes.brand} ${
                 isLight ? 'text-white' : 'text-[#0F1E36]'
@@ -82,7 +82,7 @@ export const Logo: React.FC<LogoProps> = ({
           </div>
 
           {showSubtitle && (
-            <div className="hidden min-[360px]:flex items-center gap-1 sm:gap-1.5 mt-0.5 flex-wrap">
+            <div className="hidden min-[380px]:flex items-center gap-1 sm:gap-1.5 mt-0.5 sm:mt-1 flex-wrap whitespace-nowrap">
               <span
                 className={`${textSizes.tag} font-medium uppercase ${
                   isLight ? 'text-slate-300' : 'text-slate-500'

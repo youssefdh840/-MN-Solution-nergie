@@ -116,12 +116,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           scrolled ? 'shadow-md py-2' : 'py-2.5 sm:py-3'
         }`}
       >
-        <div className="flex justify-between items-center w-full px-4 overflow-hidden max-w-7xl mx-auto gap-2">
+        <div className="flex justify-between items-center w-full px-2.5 min-[380px]:px-4 max-w-7xl mx-auto gap-1.5 min-[380px]:gap-2 sm:gap-4">
           {/* Logo with smooth click */}
           <a
             href="#accueil"
             onClick={(e) => handleNavLinkClick(e, '#accueil')}
-            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C87D55] rounded-xl p-0.5 flex items-center min-w-0 shrink"
+            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C87D55] rounded-xl p-0.5 flex items-center min-w-0 shrink-0"
             aria-label="Accueil MN Solution Énergie"
           >
             <Logo size="md" variant="dark" />
@@ -167,22 +167,22 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onOpenCallModal}
-              className="min-w-[40px] sm:min-w-[44px] min-h-[44px] p-2 text-slate-700 hover:text-[#C87D55] bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-[#C87D55] shrink-0"
+              className="w-10 h-10 sm:w-11 sm:h-11 text-slate-700 hover:text-[#C87D55] bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-[#C87D55] shrink-0"
               aria-label="Appeler l'entreprise directement"
             >
-              <Phone className="w-5 h-5 text-[#C87D55]" />
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#C87D55]" />
             </button>
 
             <button
               type="button"
               ref={menuButtonRef}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="min-w-[44px] min-h-[44px] p-2 text-slate-800 hover:text-slate-950 bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-[#C87D55] shrink-0"
+              className="w-10 h-10 sm:w-11 sm:h-11 text-slate-800 hover:text-slate-950 bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-[#C87D55] shrink-0"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav-drawer"
               aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu de navigation'}
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
         </div>
