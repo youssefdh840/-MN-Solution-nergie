@@ -82,8 +82,11 @@ export default function App() {
         {/* 9. Project Gallery with properly licensed images */}
         <GallerySection onNavigateToQuote={scrollToQuote} />
 
-        {/* 10. Service Area for Lyon and surrounding areas */}
-        <ServiceAreaSection onOpenCallModal={() => setIsCallModalOpen(true)} />
+        {/* 10. Service Area for Rhône-Alpes */}
+        <ServiceAreaSection
+          onOpenCallModal={() => setIsCallModalOpen(true)}
+          onNavigateToQuote={() => scrollToQuote()}
+        />
 
         {/* 11. Frequently Asked Questions (FAQ) */}
         <FAQSection

@@ -535,7 +535,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
 
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 flex items-center gap-2">
               <Shield className="w-4 h-4 text-[#C87D55] shrink-0" />
-              <span>Intervention garantie à Lyon et dans toutes les communes environnantes.</span>
+              <span>Intervention garantie dans l'ensemble de la région Rhône-Alpes.</span>
             </div>
 
             <div className="pt-3 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2.5">

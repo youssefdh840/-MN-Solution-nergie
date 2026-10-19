@@ -54,7 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Plomberie', href: '#plomberie' },
     { label: 'Comment ça marche', href: '#comment-ca-marche' },
     { label: 'Galerie', href: '#galerie' },
-    { label: 'Zone Lyon', href: '#zone-intervention' },
+    { label: 'Rhône-Alpes', href: '#zone-intervention' },
     { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
   ];

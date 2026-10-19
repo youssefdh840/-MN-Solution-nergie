@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = ({
               {COMPANY_INFO.description}
             </p>
             <div className="text-xs text-slate-500 pt-1">
-              Intervention à Lyon (1er au 9e) et dans les communes de la métropole lyonnaise.
+              Intervention dans l'ensemble de la région Rhône-Alpes pour vos travaux de chauffage, climatisation et plomberie.
             </div>
           </div>
 
@@ -109,7 +109,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <div>
                   <div className="text-slate-400 text-xs">Localisation :</div>
                   <span className="text-slate-300">
-                    Lyon et agglomération lyonnaise (France)
+                    Région Rhône-Alpes (France)
                   </span>
                 </div>
               </div>

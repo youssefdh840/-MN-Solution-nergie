@@ -174,7 +174,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question: 'Dans quel secteur géographique intervenez-vous ?',
     answer:
-      'Nous intervenons dans tous les arrondissements de Lyon (du 1er au 9e) ainsi que dans les communes de la métropole lyonnaise (Villeurbanne, Caluire-et-Cuire, Vénissieux, Bron, Oullins, Écully, Tassin-la-Demi-Lune, Saint-Priest, etc.). N’hésitez pas à nous appeler si votre commune est limitrophe.',
+      'MN Solution Énergie intervient rapidement dans l\'ensemble de la région Rhône-Alpes (Rhône, Isère, Ain, Loire, Drôme, Savoie, etc.) pour tous vos travaux et dépannages de chauffage, climatisation et plomberie. N\'hésitez pas à nous contacter pour confirmer la prise en charge de votre localité.',
   },
   {
     question: 'La demande de devis sur le site confirme-t-elle automatiquement un rendez-vous ?',
