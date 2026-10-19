@@ -6,6 +6,7 @@ interface LogoProps {
   variant?: 'light' | 'dark';
   showSubtitle?: boolean;
   showText?: boolean;
+  imageSrc?: string;
 }
 
 export const Logo: React.FC<LogoProps> = ({
@@ -14,13 +15,14 @@ export const Logo: React.FC<LogoProps> = ({
   variant = 'dark',
   showSubtitle = true,
   showText = true,
+  imageSrc = '/IMG_20261019_124229_286.jpg',
 }) => {
   const isLight = variant === 'light';
 
-  // Responsive image dimensions based on size
+  // Responsive image dimensions based on size - prominent h-14 / h-16
   const imageSizeClasses = {
-    sm: 'h-9 w-9 sm:h-11 sm:w-11',
-    md: 'h-12 w-12 min-[380px]:h-14 min-[380px]:w-14 sm:h-16 sm:w-16', // Prominent circular logo
+    sm: 'h-10 w-10 sm:h-12 sm:w-12',
+    md: 'h-14 w-14 sm:h-16 sm:w-16', // Prominent official circular logo (h-14 on mobile, h-16 on desktop)
     lg: 'h-16 w-16 sm:h-20 sm:w-20',
     xl: 'h-20 w-20 sm:h-24 sm:w-24',
   }[size];
@@ -32,7 +34,7 @@ export const Logo: React.FC<LogoProps> = ({
       tag: 'text-[8px] sm:text-[9px] tracking-wider',
     },
     md: {
-      brand: 'text-xs min-[350px]:text-[13px] min-[390px]:text-sm sm:text-base md:text-lg lg:text-xl font-extrabold tracking-tight',
+      brand: 'text-[11px] min-[350px]:text-xs min-[390px]:text-sm sm:text-base md:text-lg lg:text-xl font-extrabold tracking-tight',
       tag: 'text-[7.5px] min-[390px]:text-[8.5px] sm:text-[9.5px] tracking-wider sm:tracking-widest',
     },
     lg: {
@@ -49,10 +51,9 @@ export const Logo: React.FC<LogoProps> = ({
     <div className={`inline-flex items-center gap-1.5 min-[380px]:gap-2.5 sm:gap-3 select-none min-w-0 ${className}`}>
       {/* Official MN Solution Énergie Circular Emblem Image */}
       <img
-        src="/logo.png"
+        src="/IMG_20261019_124229_286.jpg"
         alt="MN Solution Énergie Logo"
         className={`${imageSizeClasses} aspect-square object-contain shrink-0 drop-shadow-md transition-transform duration-300 hover:scale-105`}
-        referrerPolicy="no-referrer"
         loading="eager"
       />
 
