@@ -90,21 +90,21 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onNavigateToQuot
               className="group cursor-pointer rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 hover:border-[#C87D55] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col focus-visible:ring-2 focus-visible:ring-[#C87D55] focus:outline-none"
               aria-label={`Voir les détails de la réalisation : ${item.title}`}
             >
-              <div className="relative h-52 sm:h-60 overflow-hidden bg-slate-200">
+              <div className="relative p-3 pb-0 overflow-hidden">
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover rounded-xl shadow-md w-full h-64 group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/40 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
+                <div className="absolute inset-3 bottom-0 rounded-xl bg-slate-950/20 group-hover:bg-slate-950/40 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/95 text-xs font-bold text-[#0F1E36] shadow">
                     <Eye className="w-3.5 h-3.5 text-[#C87D55]" />
                     <span>Agrandir</span>
                   </span>
                 </div>
 
-                <div className="absolute top-3 left-3">
+                <div className="absolute top-5 left-5">
                   <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-[#0F1E36] shadow-sm">
                     {item.category}
                   </span>

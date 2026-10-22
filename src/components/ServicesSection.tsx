@@ -62,14 +62,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group scroll-mt-28"
               >
                 {/* Image */}
-                <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
+                <div className="relative p-3 pb-0 overflow-hidden">
                   <img
                     src={service.imageUrl}
                     alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover rounded-xl shadow-md w-full h-64 group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
-                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm p-2.5 rounded-xl shadow-md">
+                  <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-sm p-2.5 rounded-xl shadow-md">
                     {getServiceIcon(service.id)}
                   </div>
                 </div>
@@ -201,17 +201,17 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             </div>
 
             <div className="lg:col-span-5">
-              <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-lg relative h-64 sm:h-72 lg:h-80">
+              <div className="relative">
                 <img
                   src={activeService.imageUrl}
                   alt={`Prestation de ${activeService.title} MN Solution Énergie`}
-                  className="w-full h-full object-cover"
+                  className="object-cover rounded-xl shadow-md w-full h-64"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F1E36]/80 via-transparent to-transparent flex items-end p-5">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F1E36]/80 via-transparent to-transparent flex items-end p-5 rounded-xl">
                   <div className="text-white">
                     <div className="text-xs text-amber-300 font-semibold uppercase tracking-wider">
-                      Lyon & secteur métropole
+                      Rhône-Alpes
                     </div>
                     <div className="text-base sm:text-lg font-bold">
                       Expertise technique en {activeService.title.toLowerCase()}

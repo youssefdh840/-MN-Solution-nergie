@@ -29,9 +29,8 @@ export const SERVICES_DATA: ServiceDetail[] = [
       'Purge, équilibrage et désembouage des circuits d’eau chaude',
       'Raccordements hydrauliques et réglages thermiques précis',
     ],
-    // High quality heating / boiler / radiator image
-    imageUrl:
-      'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80',
+    // High quality heating / boiler / Thermador installation
+    imageUrl: '/IMG_20261020_232234_524.jpg',
     accentColor: '#C87D55',
   },
   {
@@ -47,9 +46,8 @@ export const SERVICES_DATA: ServiceDetail[] = [
       'Dépannage d’unités intérieures et blocs extérieurs',
       'Conseils d’utilisation pour optimiser votre consommation',
     ],
-    // High quality air conditioning unit modern wall split image
-    imageUrl:
-      'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80',
+    // Real project photo: Unité murale climatisation
+    imageUrl: '/IMG_20261020_225040_603.jpg',
     accentColor: '#0F1E36',
   },
   {
@@ -65,9 +63,8 @@ export const SERVICES_DATA: ServiceDetail[] = [
       'Création et rénovation de tuyauteries cuivre, multicouche et PER',
       'Raccordement de sanitaires, éviers, douches et évacuations',
     ],
-    // High quality plumbing / pipes / fittings image
-    imageUrl:
-      'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1200&q=80',
+    // Real project photo: Installation ballon Eco Environnement / Pompe à chaleur
+    imageUrl: '/IMG_20261020_225034_480.jpg',
     accentColor: '#B56C45',
   },
 ];
@@ -106,57 +103,35 @@ export const SERVICE_AREAS = [
 export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 'gal-1',
-    title: 'Pose de climatiseur réversible mural',
+    title: 'Installation unité extérieure Gree',
     category: 'climatisation',
-    city: 'Lyon 6e',
-    description: 'Installation soignée d’un split mural dans un salon avec passage de goulottes discret.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1590756254933-2873d72a83b6?auto=format&fit=crop&w=800&q=80',
+    city: 'Région Rhône-Alpes',
+    description: 'Pose soignée et raccordement frigorifique d’une unité extérieure de climatisation Gree avec support antivibratile.',
+    imageUrl: '/IMG_20261020_225040_600.jpg',
   },
   {
     id: 'gal-2',
-    title: 'Raccordement de collecteur hydraulique cuivre',
+    title: 'Installation pompe à chaleur Viessmann',
     category: 'chauffage',
-    city: 'Villeurbanne',
-    description: 'Distribution de réseau de chauffage central avec soudures soignées et purgeurs d’air.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80',
+    city: 'Région Rhône-Alpes',
+    description: 'Mise en place d’une pompe à chaleur Viessmann dernière génération pour un rendement énergétique et thermique optimal.',
+    imageUrl: '/IMG_20261020_232234_527.jpg',
   },
   {
     id: 'gal-3',
-    title: 'Remplacement de robinetterie et étanchéité',
-    category: 'plomberie',
-    city: 'Caluire-et-Cuire',
-    description: 'Pose d’un mitigeur haute précision et reprise des arrivées d’eau chaude/froide.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+    title: 'Installation chaufferie et tuyauterie cuivre',
+    category: 'chauffage',
+    city: 'Région Rhône-Alpes',
+    description: 'Raccordement hydraulique complet en tuyauterie cuivre soignée avec chaufferie et ballon d’eau chaude Thermador.',
+    imageUrl: '/IMG_20261020_232234_524.jpg',
   },
   {
     id: 'gal-4',
-    title: 'Unité extérieure de climatisation sur support',
+    title: 'Unité extérieure climatisation',
     category: 'climatisation',
-    city: 'Écully',
-    description: 'Fixation antivibratile et raccordement frigorifique sécurisé pour un fonctionnement silencieux.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 'gal-5',
-    title: 'Contrôle et purge de radiateurs à eau chaude',
-    category: 'chauffage',
-    city: 'Lyon 3e',
-    description: 'Vérification de la montée en température et équilibrage des vannes thermostatiques.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 'gal-6',
-    title: 'Réfection de tuyauterie d’alimentation et vidange',
-    category: 'plomberie',
-    city: 'Bron',
-    description: 'Reprise complète de la tuyauterie sous évier avec vannes d’arrêt quart de tour.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=800&q=80',
+    city: 'Région Rhône-Alpes',
+    description: 'Fixation et raccordement technique d’une unité extérieure pour climatisation réversible silencieuse et performante.',
+    imageUrl: '/IMG_20261020_232234_528.jpg',
   },
 ];
 
