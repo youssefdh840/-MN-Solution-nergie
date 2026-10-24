@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mn-solution-energie.vercel.app/sitemap.xml
