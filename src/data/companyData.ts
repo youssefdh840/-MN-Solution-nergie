@@ -4,15 +4,16 @@ export const COMPANY_INFO = {
   name: 'MN Solution Énergie',
   tagline: 'Votre confort, notre priorité !',
   description:
-    'MN Solution Énergie vous accompagne dans vos besoins en chauffage, climatisation et plomberie à Lyon et dans les environs.',
+    'MN Solution Énergie vous accompagne pour tous vos travaux et installations de chauffage, climatisation et systèmes d’énergie thermique en région Rhône-Alpes.',
   phoneNumbers: [
-    { display: '07 58 78 22 29', raw: '+33758782229' },
-    { display: '07 87 05 28 33', raw: '+33787052833' },
+    { display: '07 58 71 82 29', raw: '+33758718229', whatsapp: 'https://wa.me/33758718229' },
+    { display: '07 87 05 28 33', raw: '+33787052833', whatsapp: 'https://wa.me/33787052833' },
   ],
+  whatsappUrl: 'https://wa.me/33758718229',
   email: 'mohamednefzaoui09@gmail.com',
   city: 'Lyon et agglomération',
   region: 'Auvergne-Rhône-Alpes, France',
-  servicesList: ['Chauffage', 'Climatisation', 'Plomberie'],
+  servicesList: ['Chauffage', 'Climatisation', 'Énergie & Pompes à chaleur'],
 };
 
 export const SERVICES_DATA: ServiceDetail[] = [
@@ -52,16 +53,16 @@ export const SERVICES_DATA: ServiceDetail[] = [
   },
   {
     id: 'plomberie',
-    title: 'Plomberie',
-    tagline: 'Interventions soignées sur réseaux d’eau, sanitaires et tuyauterie',
+    title: 'Énergie & Pompes à Chaleur',
+    tagline: 'Pompes à chaleur, ballons thermodynamiques et solutions thermiques durables',
     description:
-      'De la réparation de fuite au remplacement de vos équipements sanitaires, MN Solution Énergie répond à vos besoins de plomberie avec rigueur et propreté.',
+      'MN Solution Énergie installe, optimise et entretient vos équipements thermiques innovants : pompes à chaleur (PAC air-eau / air-air), chauffe-eau thermodynamiques et réseaux hydrauliques de haute performance.',
     bullets: [
-      'Recherche et réparation de fuites apparentes ou encastrées',
-      'Remplacement et pose de robinetterie, mitigeurs et vannes',
-      'Installation, détartrage et remplacement de chauffe-eau / cumulus',
-      'Création et rénovation de tuyauteries cuivre, multicouche et PER',
-      'Raccordement de sanitaires, éviers, douches et évacuations',
+      'Installation et remplacement de pompes à chaleur (PAC) toutes marques',
+      'Pose et raccordement de chauffe-eau thermodynamiques et ballons Eco Environnement',
+      'Raccordements hydrauliques soignés et tuyauteries cuivre de distribution',
+      'Optimisation des rendements thermiques et économies d’énergie',
+      'Entretien, régulation et mise en conformité de vos installations thermiques',
     ],
     // Real project photo: Installation ballon Eco Environnement / Pompe à chaleur
     imageUrl: '/IMG_20261020_225034_480.jpg',
@@ -139,12 +140,12 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question: 'Comment se passe une demande de devis chez MN Solution Énergie ?',
     answer:
-      'Vous pouvez remplir notre formulaire de devis en ligne ou nous contacter directement au 07 58 78 22 29 ou au 07 87 05 28 33. Nous échangeons sur votre besoin, convenons au besoin d’un diagnostic sur place à Lyon et ses environs, puis nous vous remettons une proposition détaillée.',
+      'Vous pouvez remplir notre formulaire de devis en ligne ou nous contacter directement au 07 58 71 82 29 ou au 07 87 05 28 33 (ou par WhatsApp au 07 58 71 82 29). Nous échangeons sur votre besoin, convenons au besoin d’un diagnostic sur place à Lyon et ses environs, puis nous vous remettons une proposition détaillée.',
   },
   {
     question: 'Quels sont vos numéros de téléphone officiels pour vous joindre ?',
     answer:
-      'Vous pouvez joindre notre équipe directement à deux numéros : le 07 58 78 22 29 et le 07 87 05 28 33. Vous pouvez également nous écrire à mohamednefzaoui09@gmail.com.',
+      'Vous pouvez joindre notre équipe directement à deux numéros : le 07 58 71 82 29 (disponible aussi sur WhatsApp) et le 07 87 05 28 33. Vous pouvez également nous écrire à mohamednefzaoui09@gmail.com.',
   },
   {
     question: 'Dans quel secteur géographique intervenez-vous ?',

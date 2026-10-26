@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, MapPin, PhoneCall, Sparkles, UserCheck, Layers } from 'lucide-react';
+import { ShieldCheck, MapPin, PhoneCall, Sparkles, UserCheck, Layers, MessageCircle } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 
 interface CompanyIntroProps {
@@ -16,9 +16,9 @@ export const CompanyIntro: React.FC<CompanyIntroProps> = ({ onOpenCallModal }) =
             <div className="relative">
               <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-white p-2">
                 <img
-                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
-                  alt="MN Solution Énergie - Artisan chauffage, climatisation et plomberie à Lyon"
-                  className="w-full h-72 sm:h-80 lg:h-96 object-cover rounded-2xl"
+                  src="/IMG_20261020_232234_527.jpg"
+                  alt="MN Solution Énergie - Installation pompe à chaleur Viessmann, chauffage et climatisation"
+                  className="w-full h-72 sm:h-80 lg:h-96 object-cover rounded-2xl shadow-sm"
                   loading="lazy"
                 />
               </div>
@@ -32,10 +32,10 @@ export const CompanyIntro: React.FC<CompanyIntroProps> = ({ onOpenCallModal }) =
                   </span>
                 </div>
                 <div className="text-sm font-bold leading-snug">
-                  Lyon & métropole environnante
+                  Rhône-Alpes & Métropole
                 </div>
                 <div className="text-xs text-slate-300 mt-1">
-                  Chauffage • Climatisation • Plomberie
+                  Chauffage • Climatisation • Énergie
                 </div>
               </div>
             </div>
@@ -49,15 +49,15 @@ export const CompanyIntro: React.FC<CompanyIntroProps> = ({ onOpenCallModal }) =
             </div>
 
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F1E36] tracking-tight">
-              MN Solution Énergie, votre artisan de confiance à Lyon
+              MN Solution Énergie, votre expert en solutions thermiques & climatiques
             </h2>
 
             <div className="text-sm sm:text-base lg:text-lg text-slate-700 leading-relaxed space-y-3 sm:space-y-4">
               <p>
-                <strong>{COMPANY_INFO.name}</strong> est une entreprise dédiée à vos installations thermiques et sanitaires. Guidés par notre devise, <em className="text-[#C87D55] font-semibold">« {COMPANY_INFO.tagline} »</em>, nous mettons notre savoir-faire au service de votre bien-être au quotidien.
+                <strong>{COMPANY_INFO.name}</strong> est une entreprise spécialisée dans l'installation, le dépannage et l'optimisation de vos systèmes de <strong>chauffage, climatisation et énergies thermiques</strong> en région Rhône-Alpes. Guidés par notre devise, <em className="text-[#C87D55] font-semibold">« {COMPANY_INFO.tagline} »</em>, nous mettons notre rigueur technique au service de votre confort intérieur.
               </p>
               <p className="text-slate-600 text-xs sm:text-sm lg:text-base">
-                {COMPANY_INFO.description} Que vous ayez besoin d'un dépannage sur vos installations de chauffage, de l'installation d'une climatisation pour faire face aux étés lyonnais, ou de travaux de plomberie pour votre cuisine ou salle d'eau, nous vous accompagnons avec rigueur et écoute.
+                Qu’il s’agisse de l’installation d’une pompe à chaleur haute performance, de la pose d’une climatisation réversible dernière génération, ou de la mise en place de ballons thermodynamiques et réseaux hydrauliques soignés, notre équipe vous accompagne avec réactivité et professionnalisme.
               </p>
             </div>
 
@@ -92,10 +92,10 @@ export const CompanyIntro: React.FC<CompanyIntroProps> = ({ onOpenCallModal }) =
                   <Layers className="w-5 h-5" />
                 </div>
                 <h4 className="font-bold text-[#0F1E36] text-sm">
-                  3 métiers complémentaires
+                  Chauffage, Climatisation & Énergie
                 </h4>
                 <p className="text-xs text-slate-500 mt-1">
-                  La synergie entre le chauffage, la climatisation et la plomberie pour une vision globale de vos réseaux d'énergie et d'eau.
+                  Une expertise complète pour la maîtrise de vos consommations, le confort toutes saisons et la durabilité de vos équipements thermiques.
                 </p>
               </div>
 
@@ -112,7 +112,7 @@ export const CompanyIntro: React.FC<CompanyIntroProps> = ({ onOpenCallModal }) =
               </div>
             </div>
 
-            <div className="pt-2 flex items-center gap-4">
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 type="button"
                 onClick={onOpenCallModal}
@@ -121,6 +121,17 @@ export const CompanyIntro: React.FC<CompanyIntroProps> = ({ onOpenCallModal }) =
                 <PhoneCall className="w-4 h-4 text-[#C87D55]" />
                 <span>Nous contacter par téléphone</span>
               </button>
+
+              <a
+                href="https://wa.me/33758718229?text=Bonjour%20MN%20Solution%20%C3%89nergie%2C%20je%20souhaite%20des%20informations%20pour%20mon%20projet%20de%20chauffage%20%2F%20climatisation%20%2F%20%C3%A9nergie."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-h-[44px] inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs sm:text-sm font-bold transition-all shadow-sm focus-visible:ring-2 focus-visible:ring-emerald-400"
+                aria-label="Contacter MN Solution Énergie sur WhatsApp"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>WhatsApp (07 58 71 82 29)</span>
+              </a>
             </div>
           </div>
         </div>

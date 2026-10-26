@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Phone, Mail, Menu, X, ChevronRight, FileText } from 'lucide-react';
+import { Phone, Mail, Menu, X, ChevronRight, FileText, MessageCircle } from 'lucide-react';
 import { Logo } from './Logo';
 import { COMPANY_INFO } from '../data/companyData';
 import { ServiceCategory } from '../types';
@@ -243,6 +243,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </a>
               ))}
             </div>
+
+            <a
+              href="https://wa.me/33758718229?text=Bonjour%20MN%20Solution%20%C3%89nergie."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="min-h-[44px] flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/90 text-emerald-800 font-bold text-xs transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500"
+              aria-label="Contacter sur WhatsApp au 07 58 71 82 29"
+            >
+              <MessageCircle className="w-4 h-4 text-emerald-600" />
+              <span>WhatsApp : 07 58 71 82 29</span>
+            </a>
 
             <a
               href={`mailto:${COMPANY_INFO.email}`}

@@ -141,7 +141,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
       console.error('Erreur de soumission Firestore :', err);
       setSubmitting(false);
       setErrors({
-        form: 'Une erreur est survenue lors de l’enregistrement de votre demande. Veuillez vérifier votre connexion ou nous contacter par téléphone au 07 58 78 22 29.',
+        form: 'Une erreur est survenue lors de l’enregistrement de votre demande. Veuillez vérifier votre connexion ou nous contacter par téléphone au 07 58 71 82 29.',
       });
     }
   };
@@ -352,8 +352,8 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
                   },
                   {
                     id: 'plomberie' as ServiceCategory,
-                    label: 'Plomberie',
-                    desc: 'Fuites, sanitaires, tuyauterie',
+                    label: 'Énergie & PAC',
+                    desc: 'Pompe à chaleur, ballon, thermique',
                     icon: Wrench,
                     activeClass: 'border-[#B56C45] bg-orange-50/50 text-[#0F1E36]',
                     iconColor: 'text-[#B56C45]',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Lock } from 'lucide-react';
+import { Phone, Mail, MapPin, Lock, MessageCircle } from 'lucide-react';
 import { Logo } from './Logo';
 import { COMPANY_INFO } from '../data/companyData';
 
@@ -88,6 +88,18 @@ export const Footer: React.FC<FooterProps> = ({
                       </a>
                     </div>
                   ))}
+                  <div className="pt-1">
+                    <a
+                      href="https://wa.me/33758718229?text=Bonjour%20MN%20Solution%20%C3%89nergie."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-h-[32px] inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-bold text-xs focus-visible:ring-1 focus-visible:ring-emerald-400 rounded px-1"
+                      aria-label="Contacter sur WhatsApp au 07 58 71 82 29"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      <span>WhatsApp : 07 58 71 82 29</span>
+                    </a>
+                  </div>
                 </div>
               </div>
 

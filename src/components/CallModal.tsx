@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Copy, Check, X, ShieldCheck } from 'lucide-react';
+import { Phone, Copy, Check, X, ShieldCheck, MessageCircle } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 
 interface CallModalProps {
@@ -116,10 +116,30 @@ export const CallModal: React.FC<CallModalProps> = ({ isOpen, onClose }) => {
             ))}
           </div>
 
-          <div className="mt-5 p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5 text-xs text-slate-600">
+          {/* WhatsApp Direct Option */}
+          <div className="mt-4 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200/90 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5 text-xs text-emerald-950">
+              <MessageCircle className="w-5 h-5 text-emerald-600 shrink-0" />
+              <div>
+                <span className="font-bold block text-emerald-900">Contact rapide sur WhatsApp</span>
+                <span className="text-emerald-700">Discutez directement au 07 58 71 82 29</span>
+              </div>
+            </div>
+            <a
+              href="https://wa.me/33758718229?text=Bonjour%20MN%20Solution%20%C3%89nergie%2C%20je%20souhaite%20des%20renseignements%20pour%20un%20projet."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="min-h-[40px] px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-bold transition-all shadow-xs inline-flex items-center gap-1.5 shrink-0"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Ouvrir WhatsApp</span>
+            </a>
+          </div>
+
+          <div className="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5 text-xs text-slate-600">
             <ShieldCheck className="w-4 h-4 text-[#C87D55] shrink-0 mt-0.5" />
             <span>
-              Interventions sur Lyon (1er au 9e) et communes limitrophes. Nos techniciens vous répondent directement pour évaluer votre besoin.
+              Interventions sur l'ensemble de la région Rhône-Alpes. Nos techniciens vous répondent directement pour évaluer votre besoin en chauffage, climatisation et énergie.
             </span>
           </div>
 

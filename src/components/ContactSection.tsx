@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail } from 'lucide-react';
+import { Phone, Mail, MessageCircle } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 import { QuoteForm } from './QuoteForm';
 import { ServiceCategory } from '../types';
@@ -20,7 +20,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
             Parlons de votre projet
           </h2>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-slate-600">
-            Joignez-nous directement par téléphone ou déposez votre demande de devis détaillée via notre formulaire ci-dessous.
+            Joignez-nous directement par téléphone ou par WhatsApp au 07 58 71 82 29, ou déposez votre demande de devis détaillée via notre formulaire ci-dessous.
           </p>
         </div>
 
@@ -29,27 +29,43 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
           {/* Phone 1 */}
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/90 shadow-sm hover:border-[#C87D55] transition-all flex flex-col justify-between group">
             <div>
-              <div className="w-12 h-12 rounded-xl bg-amber-50 text-[#C87D55] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <Phone className="w-6 h-6" />
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded-xl bg-amber-50 text-[#C87D55] flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/70">
+                  <MessageCircle className="w-3.5 h-3.5 text-emerald-600" /> WhatsApp
+                </span>
               </div>
               <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                Ligne Directe 1
+                Ligne Directe 1 & WhatsApp
               </span>
               <h3 className="text-lg sm:text-xl font-black text-[#0F1E36] mt-1 mb-2">
                 {COMPANY_INFO.phoneNumbers[0].display}
               </h3>
               <p className="text-xs text-slate-500">
-                Contact direct avec notre équipe technique pour toute intervention sur Lyon.
+                Contact direct avec notre équipe technique pour toute intervention sur la région Rhône-Alpes.
               </p>
             </div>
-            <div className="mt-5 pt-4 border-t border-slate-100">
+            <div className="mt-5 pt-4 border-t border-slate-100 space-y-2">
               <a
                 href={`tel:${COMPANY_INFO.phoneNumbers[0].raw}`}
-                className="min-h-[48px] inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-[#0F1E36] hover:bg-[#C87D55] active:scale-95 text-white text-xs sm:text-sm font-bold transition-all shadow-sm focus-visible:ring-2 focus-visible:ring-[#C87D55]"
+                className="min-h-[44px] inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-[#0F1E36] hover:bg-[#C87D55] active:scale-95 text-white text-xs sm:text-sm font-bold transition-all shadow-sm focus-visible:ring-2 focus-visible:ring-[#C87D55]"
                 aria-label={`Appeler la ligne 1 au ${COMPANY_INFO.phoneNumbers[0].display}`}
               >
                 <Phone className="w-4 h-4 text-[#C87D55]" />
                 <span>Appeler maintenant</span>
+              </a>
+
+              <a
+                href="https://wa.me/33758718229?text=Bonjour%20MN%20Solution%20%C3%89nergie%2C%20je%20souhaite%20des%20informations%20pour%20mon%20projet."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-h-[44px] inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs sm:text-sm font-bold transition-all shadow-sm focus-visible:ring-2 focus-visible:ring-emerald-400"
+                aria-label="Contacter sur WhatsApp au 07 58 71 82 29"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Écrire sur WhatsApp</span>
               </a>
             </div>
           </div>

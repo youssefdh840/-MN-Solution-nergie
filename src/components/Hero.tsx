@@ -7,6 +7,7 @@ import {
   FileText,
   ArrowRight,
   CheckCircle,
+  MessageCircle,
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 import { ServiceCategory } from '../types';
@@ -99,6 +100,17 @@ export const Hero: React.FC<HeroProps> = ({
                     <span>{phone.display}</span>
                   </a>
                 ))}
+
+                <a
+                  href="https://wa.me/33758718229?text=Bonjour%20MN%20Solution%20%C3%89nergie%2C%20je%20souhaite%20un%20devis%20ou%20des%20renseignements."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-h-[44px] inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 hover:text-emerald-200 text-xs sm:text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-emerald-400"
+                  aria-label="Contacter sur WhatsApp au 07 58 71 82 29"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-400" />
+                  <span>WhatsApp</span>
+                </a>
               </div>
             </div>
 
@@ -120,8 +132,8 @@ export const Hero: React.FC<HeroProps> = ({
                   service: 'climatisation' as const,
                 },
                 {
-                  label: 'Plomberie',
-                  desc: 'Fuites & sanitaires',
+                  label: 'Énergie & PAC',
+                  desc: 'Pompe à chaleur, thermique',
                   icon: Wrench,
                   color: 'text-[#DE8E60]',
                   service: 'plomberie' as const,
@@ -156,8 +168,8 @@ export const Hero: React.FC<HeroProps> = ({
 
               <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-white/15 shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=900&q=80"
-                  alt="Installation thermique et plomberie par MN Solution Énergie"
+                  src="/IMG_20261020_232234_524.jpg"
+                  alt="Installation chauffage, climatisation et énergies thermiques par MN Solution Énergie"
                   className="w-full h-64 sm:h-80 lg:h-96 object-cover object-center filter brightness-[0.92]"
                   loading="eager"
                 />

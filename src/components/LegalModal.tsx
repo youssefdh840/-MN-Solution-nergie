@@ -69,8 +69,8 @@ export const LegalModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) => {
             </p>
             <ul className="list-disc pl-5 mt-2 space-y-1 text-xs">
               <li><strong>Raison sociale :</strong> {COMPANY_INFO.name}</li>
-              <li><strong>Activité :</strong> Chauffage, Climatisation et Plomberie</li>
-              <li><strong>Zone d'activité :</strong> Lyon et sa métropole (France)</li>
+              <li><strong>Activité :</strong> Chauffage, Climatisation et Énergies Thermiques (Pompes à chaleur, thermodynamique)</li>
+              <li><strong>Zone d'activité :</strong> Région Rhône-Alpes (France)</li>
               <li><strong>Téléphones :</strong> {COMPANY_INFO.phoneNumbers.map(p => p.display).join(' / ')}</li>
               <li><strong>Courriel :</strong> {COMPANY_INFO.email}</li>
             </ul>
