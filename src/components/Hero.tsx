@@ -166,11 +166,11 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="relative mx-auto max-w-md lg:max-w-none">
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-[#C87D55] via-slate-700 to-sky-400 opacity-25 blur-lg" aria-hidden="true" />
 
-              <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-white/15 shadow-2xl">
+              <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-white/15 shadow-2xl group">
                 <img
-                  src="/IMG_20261020_232234_524.jpg"
-                  alt="Installation chauffage, climatisation et énergies thermiques par MN Solution Énergie"
-                  className="w-full h-64 sm:h-80 lg:h-96 object-cover object-center filter brightness-[0.92]"
+                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80"
+                  alt="Installation et maintenance de chauffage, climatisation et énergies thermiques - MN Solution Énergie"
+                  className="w-full h-64 sm:h-80 lg:h-96 object-cover object-center filter brightness-[0.88] group-hover:scale-105 transition-transform duration-700"
                   loading="eager"
                 />
 
@@ -182,15 +182,15 @@ export const Hero: React.FC<HeroProps> = ({
                       Proximité & Réactivité
                     </span>
                   </div>
-                  <div className="text-base sm:text-lg font-bold text-white leading-snug">
+                  <div className="text-base sm:text-lg font-bold text-white leading-snug drop-shadow-sm">
                     Intervention sur Lyon et communes limitrophes
                   </div>
-                  <div className="flex items-center gap-3 sm:gap-4 mt-2 sm:mt-3 text-xs text-slate-300">
-                    <span className="inline-flex items-center gap-1">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-400" /> Devis gratuit
+                  <div className="flex items-center gap-3 sm:gap-4 mt-2 sm:mt-3 text-xs text-slate-200">
+                    <span className="inline-flex items-center gap-1 font-medium">
+                      <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" /> Devis gratuit
                     </span>
-                    <span className="inline-flex items-center gap-1">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-400" /> Sans intermédiaire
+                    <span className="inline-flex items-center gap-1 font-medium">
+                      <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" /> Sans intermédiaire
                     </span>
                   </div>
                 </div>
